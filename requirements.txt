@@ -84,7 +84,7 @@ pydantic==2.13.3
 pydantic_core==2.46.3
 pyee==13.0.1
 Pygments==2.20.0
-pyinstaller==6.13.0
+pyinstaller==6.15.0
 pyinstaller-hooks-contrib==2025.3
 pyOpenSSL==26.0.0
 PySocks==1.7.1
