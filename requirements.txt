@@ -89,7 +89,6 @@ pyinstaller-hooks-contrib==2025.3
 pyOpenSSL==26.0.0
 PySocks==1.7.1
 python-dotenv==1.1.0
-pywin32==310
 pywin32-ctypes==0.2.3
 PyYAML==6.0.3
 rank-bm25==0.2.2
