@@ -183,7 +183,7 @@ for category, ids in addon_categories.items():
 # ==========================================
 # 5. PUBLIC ENDPOINTLER
 # ==========================================
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def serve_index():
     # Siteye ilk girildiğinde public klasöründeki index.html'i göster
     index_path = os.path.join(PUBLIC_DIR, "index.html")
