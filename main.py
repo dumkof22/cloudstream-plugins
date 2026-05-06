@@ -1,4 +1,8 @@
 import os
+
+# Proje kök dizinini __file__ bazlı hesapla (Render gibi ortamlarda CWD farklı olabilir)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PUBLIC_DIR = os.path.join(BASE_DIR, "public")
 import json
 import asyncio
 import sys
@@ -139,9 +143,9 @@ app.add_middleware(
 )
 
 # Statik dosyalar (public klasörü varsa)
-if not os.path.exists('public'):
-    os.makedirs('public')
-app.mount("/public", StaticFiles(directory="public"), name="public")
+if not os.path.exists(PUBLIC_DIR):
+    os.makedirs(PUBLIC_DIR)
+app.mount("/public", StaticFiles(directory=PUBLIC_DIR), name="public")
 
 # Admin Yetkilendirme Dependency
 async def check_auth(
@@ -182,10 +186,17 @@ for category, ids in addon_categories.items():
 @app.get("/")
 async def serve_index():
     # Siteye ilk girildiğinde public klasöründeki index.html'i göster
-    import os
-    if os.path.exists("public/index.html"):
-        return FileResponse("public/index.html")
+    index_path = os.path.join(PUBLIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
     return {"message": "index.html public klasöründe bulunamadı."}
+
+@app.get("/admin.html")
+async def serve_admin():
+    admin_path = os.path.join(PUBLIC_DIR, "admin.html")
+    if os.path.exists(admin_path):
+        return FileResponse(admin_path)
+    return {"message": "admin.html public klasöründe bulunamadı."}
     
 @app.get("/health")
 async def health_check():
